@@ -101,24 +101,28 @@
   @media (max-width: 1023px) { .wall { grid-template-columns: repeat(3, minmax(0, 1fr)); } .wall a:nth-child(n+7) { display: none; } }
   @media (max-width: 639px) { .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } .wall a:nth-child(n+5) { display: none; } }
 
-  /* the first screen: the showroom's photographs change every 5 s (a slow cross-fade and a slight zoom), with a pause button */
-  .hero-slides { overflow: clip; background: var(--surface); }
+  /* the first screen: the words left and the showroom's photographs right, each shown nearly whole; they change every 5 s (a slow cross-fade and a slight zoom) */
+  .hero-slides { position: relative; overflow: clip; background: var(--surface); }
   .hero-slides > img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: var(--pos, 50% 50%); opacity: 0; transition: opacity 1400ms var(--ease); }
   .hero-slides > img.is-on { opacity: 1; }
   .hero-slides.is-playing > img.is-on { animation: slide-zoom 7s ease-out both; }
   @keyframes slide-zoom { from { transform: scale(1.06); } to { transform: scale(1); } }
-  .slides-pause { position: absolute; z-index: 2; top: calc(var(--nav) + var(--photo) - 60px); right: max(var(--gut), (100% - var(--container)) / 2); width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: rgb(246 241 234 / .88); color: var(--p-ink); display: grid; place-items: center; cursor: pointer; }
-  .slides-pause svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .slides-pause .i-play { display: none; fill: currentColor; stroke: none; }
-  .slides-pause[aria-pressed="true"] .i-pause { display: none; }
-  .slides-pause[aria-pressed="true"] .i-play { display: block; }
-  @media (prefers-reduced-motion: reduce) { .slides-pause { display: none; } .hero-slides > img { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero-slides > img { transition: none; } }
+  .hero--showroom .hero-copy > h1 { font-size: clamp(36px, 3.5vw, 60px); line-height: 1.08; }
+  .hero--showroom .hero-copy > .t-lead { max-width: 30ch; }
+  .hero--showroom .hero-facts { grid-template-columns: repeat(3, auto); justify-content: start; column-gap: var(--s-7); }
+  /* a short laptop window keeps the photograph tall enough to show the furniture whole */
+  @media (min-width: 1024px) { main > .hero--showroom { height: max(100svh, 760px); } }
+  @media (max-width: 1023px) { .hero--showroom .hero-facts { display: none; } .hero--showroom .hero-slides { min-height: min(110vw, 520px); } }
+  /* today's opening hours are not marked with a dot */
+  .hours dt.is-today::after { content: none; }
 
   .footer__phone { font: 400 20px/30px var(--font-text); }
   /* the photograph under the address and the hours, never over them */
-  .footer-photo { margin: var(--s-6) 0 0; aspect-ratio: 10 / 3; overflow: clip; border-radius: var(--r-lg); background: var(--surface); }
+  .footer-photo { margin: 0; aspect-ratio: 1200 / 1359; overflow: clip; border-radius: var(--r-lg); background: var(--surface); }
   .footer-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 639px) { .footer-photo { aspect-ratio: 16 / 9; } }
+  .footer__hours-h { margin-top: var(--s-5); }
+  @media (max-width: 1023px) { .footer-photo { grid-column: 1 / -1; aspect-ratio: 4 / 3; margin-top: var(--s-5); } .footer-photo img { object-position: 50% 45%; } }
 
   /* every section is at least its screens and grows when a short window (a 1366x657 laptop) cannot hold it,
      so nothing ever lies on the next section; the two-screen catalogue keeps each row at least its content */
@@ -133,30 +137,24 @@
     main > section#catalog.g2 { min-height: 0; }
     main > section#catalog.g2 > .wrap { grid-template-rows: auto auto; row-gap: var(--s-8); }
   }
-  main > .hero--place { height: auto; min-height: 100svh; }
-  /* the hero keeps its entrance zoom (scale 1.05) inside its own box, so the page never scrolls sideways */
-  main > .hero--place { overflow-x: clip; }
-  /* the place hero: a taller photograph so the words end near the fold, not over an empty band */
-  @media (min-width: 1024px) { .hero--place { --photo: min(560px, 60svh); } :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 44px; } }
   /* the statement fills its screen */
   #floors .mo-wh__text { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.2; max-width: 1100px; }
   #floors .t-label { margin-bottom: var(--s-5); }
   .closing__cta h2 { max-width: none; }
+  /* the hero keeps its entrance zoom inside its own box, so the page never scrolls sideways */
+  main > .hero { overflow-x: clip; }
   .footer--visit .footer__nav { margin-top: var(--s-6); }
 
   /* big screens: a wider column and larger type from 1680, again from 2200 (a 2560 monitor) */
   @media (min-width: 1680px) {
     html[data-type="place"] { --container: 1440px; --t-h2: 40px; --t-lead: 22px; --t-body: 17px; --t-card: 22px; }
-    .hero--place { --photo: min(680px, 60svh); }
-    :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 54px; }
     #floors .mo-wh__text { font-size: 52px; max-width: 1300px; }
+    .hero--showroom .hero-copy > h1 { font-size: 64px; }
     .goods .tile__head > h3 { font-size: 18px; line-height: 26px; min-height: 52px; }
     .type-moment { font-size: 104px; }
   }
   @media (min-width: 2200px) {
     html[data-type="place"] { --container: 1760px; --t-h2: 48px; --t-lead: 24px; --t-body: 18px; --t-card: 24px; }
-    .hero--place { --photo: min(820px, 60svh); }
-    :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 64px; }
     #floors .mo-wh__text { font-size: 62px; max-width: 1560px; }
     .goods .tile__head > h3 { font-size: 20px; line-height: 28px; min-height: 56px; }
     .type-moment { font-size: 128px; }
@@ -181,7 +179,6 @@
     #visit .pl-photo { margin-top: var(--s-3); }
   }
   @media (max-width: 639px) {
-    :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 30px; }
     .logo-word { display: none; }
     .nav__tools .lang a { min-width: 34px; padding: 0; font-size: 14px; }
     .type-moment { font-size: 32px; margin: var(--s-3) 0 var(--s-5); }
@@ -193,7 +190,6 @@
     #visit .pl-photo { margin-top: var(--s-3); }
     #visit .visit .btn--secondary { display: none; }
     #floors .mo-wh__text { font-size: 25px; }
-    footer.closing .closing__links > .grid > .start-7 { display: none; }
     .goods .tile__head > h3 { min-height: 48px; }
     #catalog .section-head p { display: none; }
     /* every price waits for the owner (… ֏): on a phone the line is dropped so the catalogue keeps two screens */
@@ -309,22 +305,28 @@
 </header>
 
 <main id="top">
-  <section class="hero hero--place" data-enter aria-labelledby="hero-h">
-    <div class="hero__bg hero-slides" data-slides>
-      <img class="is-on" src="img/DgPLLgmiF8F_1.jpg" srcset="img/DgPLLgmiF8F_1-s.jpg 960w, img/DgPLLgmiF8F_1.jpg 1920w" sizes="100vw" alt="Հյուրասենյակ InHome-ի սրահում՝ կաթնագույն բազմոց, երկու բազկաթոռ և սուրճի սեղան" data-i18n-alt="alt.hero" style="--pos: 50% 58%" fetchpriority="high" width="1920" height="1920" data-source="client" data-subject="living room set in the showroom">
-      <img data-src="img/DfmTWAFCBzY_1-hero.jpg" data-srcset="img/DfmTWAFCBzY_1-hero-s.jpg 960w, img/DfmTWAFCBzY_1-hero.jpg 1600w" sizes="100vw" alt="Մոխրագույն անկյունային բազմոց սրահի մեծ պատուհանների մոտ" data-i18n-alt="alt.slide2" style="--pos: 50% 55%" width="1600" height="1200" data-source="client" data-subject="corner sofa by the showroom windows">
-      <img data-src="img/Dfy2Y57CFBk_1-hero.jpg" data-srcset="img/Dfy2Y57CFBk_1-hero-s.jpg 960w, img/Dfy2Y57CFBk_1-hero.jpg 1600w" sizes="100vw" alt="Ննջասենյակ թավշյա գլխատախտակով և ոսկեգույն դետալներով" data-i18n-alt="alt.slide3" style="--pos: 50% 50%" width="1600" height="1200" data-source="client" data-subject="bedroom with a velvet headboard">
-      <img data-src="img/DgAGabtiKJs_5.jpg" data-srcset="img/DgAGabtiKJs_5-s.jpg 800w, img/DgAGabtiKJs_5.jpg 1600w" sizes="100vw" alt="Սպիտակ TV պատ ապակե ցուցապահարաններով" data-i18n-alt="alt.slide4" style="--pos: 50% 52%" width="1600" height="1600" data-source="client" data-subject="white TV wall in the showroom">
-      <img data-src="img/DfrKy8tCKaB_2-hero.jpg" data-srcset="img/DfrKy8tCKaB_2-hero-s.jpg 960w, img/DfrKy8tCKaB_2-hero.jpg 1600w" sizes="100vw" alt="Ննջասենյակ բաց կաղնու երանգով" data-i18n-alt="alt.slide5" style="--pos: 50% 55%" width="1600" height="1200" data-source="client" data-subject="light oak bedroom">
-    </div>
-    <button class="slides-pause" type="button" data-slides-pause aria-pressed="false" aria-label="Կանգնեցնել լուսանկարները" data-i18n-aria="slides.pause"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-pause" d="M5 3.5v9M11 3.5v9"/><path class="i-play" d="M5 3l8 5-8 5z"/></svg></button>
-    <div class="wrap"><div class="hero-text">
-      <div class="hero__text">
-        <h1 id="hero-h" data-i18n="hero.h1">Կահույքի սրահ Աբովյանում</h1>
-        <p class="hero__lead" data-i18n="hero.lead">3 հարկ կահույք Երևանյան փողոցում՝ սեփական արտադրություն և ապառիկ տեղում։</p>
-        <div class="btn-row"><a class="btn btn--primary" href="#catalog"><span data-i18n="cta">Պատվիրել կահույք</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
+  <section class="hero hero--split hero--showroom" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text grid hero-split">
+        <div class="hero-copy span-5">
+          <h1 id="hero-h" data-i18n="hero.h1">Կահույքի սրահ Աբովյանում</h1>
+          <p class="t-lead" data-i18n="hero.lead">Հյուրասենյակի և ննջասենյակի կահույք սեփական արտադրությունից՝ Երևանյան փողոցում։</p>
+          <div class="btn-row"><a class="btn btn--primary" href="#catalog"><span data-i18n="cta">Պատվիրել կահույք</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
+          <dl class="hero-facts">
+            <div><dt data-i18n="fact.floors">Սրահ</dt><dd data-i18n="fact.floors.v">3 հարկ</dd></div>
+            <div><dt data-i18n="fact.credit">Ապառիկ</dt><dd data-i18n="fact.credit.v">Տեղում</dd></div>
+            <div><dt data-i18n="fact.delivery">Առաքում</dt><dd data-i18n="fact.delivery.v">Անվճար Աբովյանում</dd></div>
+          </dl>
+        </div>
+        <div class="hero-visual hero-slides span-7 start-6" data-slides>
+          <img class="is-on" src="img/DgPLLgmiF8F_1-hero.jpg" srcset="img/DgPLLgmiF8F_1-hero-s.jpg 900w, img/DgPLLgmiF8F_1-hero.jpg 1600w" sizes="(max-width: 1023px) 100vw, 58vw" alt="Հյուրասենյակ InHome-ի սրահում՝ կաթնագույն բազմոց, երկու բազկաթոռ և սուրճի սեղան" data-i18n-alt="alt.hero" style="--pos: 50% 60%" fetchpriority="high" width="1600" height="1600" data-source="client" data-subject="living room set in the showroom">
+          <img data-src="img/DfmTWAFCBzY_1-hero.jpg" data-srcset="img/DfmTWAFCBzY_1-hero-s.jpg 675w, img/DfmTWAFCBzY_1-hero.jpg 1200w" sizes="(max-width: 1023px) 100vw, 58vw" alt="Մոխրագույն անկյունային բազմոց սրահի մեծ պատուհանների մոտ" data-i18n-alt="alt.slide2" style="--pos: 50% 70%" width="1200" height="1600" data-source="client" data-subject="corner sofa by the showroom windows">
+          <img data-src="img/Dfy2Y57CFBk_1-hero.jpg" data-srcset="img/Dfy2Y57CFBk_1-hero-s.jpg 678w, img/Dfy2Y57CFBk_1-hero.jpg 1205w" sizes="(max-width: 1023px) 100vw, 58vw" alt="Ննջասենյակ թավշյա գլխատախտակով և ոսկեգույն դետալներով" data-i18n-alt="alt.slide3" style="--pos: 50% 66%" width="1205" height="1600" data-source="client" data-subject="bedroom with a velvet headboard">
+          <img data-src="img/DgAGabtiKJs_5-hero.jpg" data-srcset="img/DgAGabtiKJs_5-hero-s.jpg 783w, img/DgAGabtiKJs_5-hero.jpg 1392w" sizes="(max-width: 1023px) 100vw, 58vw" alt="Սպիտակ TV պատ ապակե ցուցապահարաններով" data-i18n-alt="alt.slide4" style="--pos: 50% 56%" width="1392" height="1600" data-source="client" data-subject="white TV wall in the showroom">
+          <img data-src="img/DfrKy8tCKaB_2-hero.jpg" data-srcset="img/DfrKy8tCKaB_2-hero-s.jpg 675w, img/DfrKy8tCKaB_2-hero.jpg 1200w" sizes="(max-width: 1023px) 100vw, 58vw" alt="Ննջասենյակ բաց կաղնու երանգով" data-i18n-alt="alt.slide5" style="--pos: 50% 62%" width="1200" height="1600" data-source="client" data-subject="light oak bedroom">
+        </div>
       </div>
-    </div></div>
+    </div>
   </section>
 
   <section class="section" id="visit" data-place="visit" aria-labelledby="visit-h">
@@ -442,18 +444,16 @@
       </div>
     </div>
     <div class="closing__links">
-      <div class="grid">
+      <div class="grid grid--top">
         <div class="span-6 stack-4">
           <address class="footer__address" data-i18n="addr.short">Երևանյան 1/24, Աբովյան</address>
           <a class="footer__phone link" href="tel:+37477727502">077 72 75 02</a>
           <p><a class="link" href="https://www.openstreetmap.org/search?query=Yerevanyan%20Street%201%2F24%20Abovyan" data-i18n="map">Տեսնել քարտեզում</a></p>
-        </div>
-        <div class="span-6 start-7 stack-4">
-          <h3 data-i18n="hours.h">Աշխատանքային ժամեր</h3>
+          <h3 class="footer__hours-h" data-i18n="hours.h">Աշխատանքային ժամեր</h3>
           <dl class="hours" data-tz="Asia/Yerevan" data-assumed><dt data-days="mon-sun" data-i18n="hours.days">Երկուշաբթի–կիրակի</dt><dd>10:00–20:00</dd></dl>
         </div>
+        <figure class="footer-photo span-4 start-9"><img src="img/DfrKy8tCKaB_1-foot.jpg" srcset="img/DfrKy8tCKaB_1-foot-s.jpg 600w, img/DfrKy8tCKaB_1-foot.jpg 1200w" sizes="(max-width: 639px) 100vw, (max-width: 1279px) 33vw, 400px" alt="Ննջասենյակ բաց կաղնու երանգով՝ մահճակալ, պահարան, գիշերային սեղաններ և լամպեր" data-i18n-alt="alt.close" loading="lazy" width="1200" height="1359" data-source="client" data-subject="whole light oak bedroom"></figure>
       </div>
-      <figure class="footer-photo"><img src="img/Df39jgTiDd1_1-foot.jpg" srcset="img/Df39jgTiDd1_1-foot-s.jpg 960w, img/Df39jgTiDd1_1-foot.jpg 1440w" sizes="(max-width: 1279px) 100vw, 1200px" alt="Ննջասենյակ մոխրագույն և կաղնու երանգներով" data-i18n-alt="alt.close" loading="lazy" width="1440" height="432" data-source="client" data-subject="grey and oak bedroom"></figure>
       <nav class="footer__nav" aria-label="Footer">
         <a href="#catalog" data-i18n="nav.furniture">Կահույք</a>
         <a href="#showroom" data-i18n="nav.showroom">Սրահը</a>
@@ -545,7 +545,9 @@
       "menu.tv": "ТВ-гарнитуры", "menu.tv.l": "Тумбы и стеклянные витрины",
       cta: "Заказать мебель",
       "hero.h1": "Мебельный салон в Абовяне",
-      "hero.lead": "3 этажа мебели на улице Ереванян: своё производство и рассрочка на месте.",
+      "hero.lead": "Гостиные и спальни собственного производства на улице Ереванян.",
+      "fact.floors": "Салон", "fact.floors.v": "3 этажа", "fact.credit": "Рассрочка", "fact.credit.v": "На месте",
+      "fact.delivery": "Доставка", "fact.delivery.v": "Бесплатно по Абовяну",
       "alt.hero": "Гостиная в салоне InHome: диван молочного цвета, два кресла и журнальный столик",
       "visit.h2": "Как нас найти", "addr.short": "Ереванян 1/24, Абовян",
       "addr.l1": "Улица Ереванян 1/24", "addr.l2": "Абовян, Котайкская область",
@@ -569,8 +571,7 @@
       "alt.slide3": "Спальня с бархатным изголовьем и золотыми деталями",
       "alt.slide4": "Белая ТВ-стенка со стеклянными витринами",
       "alt.slide5": "Спальня в светлом дубе",
-      "slides.pause": "Остановить фото",
-      "alt.close": "Спальня в сером и дубе",
+      "alt.close": "Спальня в светлом дубе: кровать, шкаф, тумбы и лампы",
       notice: "Демо-версия, не официальный сайт"
     },
     en: {
@@ -583,7 +584,9 @@
       "menu.tv": "TV units", "menu.tv.l": "TV stands and glass cabinets",
       cta: "Order furniture",
       "hero.h1": "Furniture showroom in Abovyan",
-      "hero.lead": "3 floors of furniture on Yerevanyan Street: made in our own workshop, instalments on the spot.",
+      "hero.lead": "Living rooms and bedrooms from our own workshop on Yerevanyan Street.",
+      "fact.floors": "Showroom", "fact.floors.v": "3 floors", "fact.credit": "Instalments", "fact.credit.v": "On the spot",
+      "fact.delivery": "Delivery", "fact.delivery.v": "Free in Abovyan",
       "alt.hero": "Living room in the InHome showroom: a cream sofa, two armchairs and a coffee table",
       "visit.h2": "How to find us", "addr.short": "Yerevanyan 1/24, Abovyan",
       "addr.l1": "Yerevanyan Street 1/24", "addr.l2": "Abovyan, Kotayk Province",
@@ -607,8 +610,7 @@
       "alt.slide3": "Bedroom with a velvet headboard and gold details",
       "alt.slide4": "White TV wall with glass cabinets",
       "alt.slide5": "Bedroom in light oak",
-      "slides.pause": "Pause the photographs",
-      "alt.close": "Bedroom in grey and oak",
+      "alt.close": "Light oak bedroom: bed, wardrobe, nightstands and lamps",
       notice: "Demo version, not the official site"
     }
   };

@@ -1,14 +1,13 @@
 /* Слайд-шоу первого экрана: фото салона сменяют друг друга каждые 5 с (плавный переход и лёгкое приближение).
-   Следующий кадр грузится заранее; при «меньше движения» и на скрытой вкладке слайд-шоу стоит; кнопка — пауза. */
+   Следующий кадр грузится заранее; при «меньше движения» в настройках устройства и на скрытой вкладке слайд-шоу стоит. */
 (function () {
   "use strict";
   const box = document.querySelector("[data-slides]");
   if (!box) return;
   const slides = [...box.querySelectorAll("img")];
-  const btn = document.querySelector("[data-slides-pause]");
   const STEP = 5000;
   const still = matchMedia("(prefers-reduced-motion: reduce)");
-  let i = 0, timer = 0, paused = false;
+  let i = 0, timer = 0;
 
   // подставить адрес кадра, когда он понадобится (первый уже на месте)
   const load = img => {
@@ -29,19 +28,13 @@
       load(slides[(n + 1) % slides.length]);   // следующий заранее
     });
   }
-  const tick = () => show((i + 1) % slides.length);
-  const running = () => !paused && !still.matches && !document.hidden;
+  const running = () => !still.matches && !document.hidden;
   function sync() {
     clearInterval(timer);
     box.classList.toggle("is-playing", running());
-    if (running()) timer = setInterval(tick, STEP);
+    if (running()) timer = setInterval(() => show((i + 1) % slides.length), STEP);
   }
 
-  if (btn) btn.addEventListener("click", () => {
-    paused = !paused;
-    btn.setAttribute("aria-pressed", String(paused));
-    sync();
-  });
   document.addEventListener("visibilitychange", sync);
   still.addEventListener("change", sync);
   // второй кадр начинает грузиться, когда первый уже показан
