@@ -57,7 +57,7 @@
       sending: "Ուղարկում ենք…", eSend: `Չհաջողվեց ուղարկել։ Զանգահարեք՝ ${PHONE}։`,
       orderNo: "Պատվեր №", sent: "Պատվերը ստացանք։ Կզանգահարենք՝ գինը և առաքման օրը հաստատելու համար։",
       demo: "Սա ցուցադրական տարբերակ է՝ պատվերը ոչ մի տեղ չի ուղարկվում։", back: "Շարունակել ընտրությունը",
-      minus: "Պակասեցնել", plus: "Ավելացնել", remove: "Հեռացնել", photo: (i, n) => `Լուսանկար ${i}՝ ${n}-ից`,
+      minus: "Պակասեցնել", plus: "Ավելացնել", prev: "Նախորդ լուսանկարը", next: "Հաջորդ լուսանկարը", remove: "Հեռացնել", photo: (i, n) => `Լուսանկար ${i}՝ ${n}-ից`,
       count: n => `Զամբյուղ, ${n} ապրանք`, pay: { cash: "Наличными", card: "Картой", credit: "Рассрочка" } },
     ru: { cart: "Корзина", close: "Закрыть", add: "В корзину", total: "Итого",
       empty: "Корзина пуста. Выберите модель в каталоге.",
@@ -69,7 +69,7 @@
       sending: "Отправляем…", eSend: `Не удалось отправить. Позвоните: ${PHONE}.`,
       orderNo: "Заказ №", sent: "Заказ получили. Мы позвоним, чтобы подтвердить цену и день доставки.",
       demo: "Это демо-версия: заказ никуда не отправляется.", back: "Продолжить выбор",
-      minus: "Меньше", plus: "Больше", remove: "Удалить", photo: (i, n) => `Фото ${i} из ${n}`,
+      minus: "Меньше", plus: "Больше", prev: "Предыдущее фото", next: "Следующее фото", remove: "Удалить", photo: (i, n) => `Фото ${i} из ${n}`,
       count: n => `Корзина, товаров: ${n}` },
     en: { cart: "Cart", close: "Close", add: "Add to cart", total: "Total",
       empty: "Your cart is empty. Choose a piece from the catalogue.",
@@ -81,7 +81,7 @@
       sending: "Sending…", eSend: `The order did not go through. Please call ${PHONE}.`,
       orderNo: "Order no.", sent: "We have your order. We will call to confirm the price and the delivery day.",
       demo: "This is a demo: the order is not sent anywhere.", back: "Keep browsing",
-      minus: "Fewer", plus: "More", remove: "Remove", photo: (i, n) => `Photo ${i} of ${n}`,
+      minus: "Fewer", plus: "More", prev: "Previous photo", next: "Next photo", remove: "Remove", photo: (i, n) => `Photo ${i} of ${n}`,
       count: n => `Cart, ${n} item${n === 1 ? "" : "s"}` }
   };
   const t = T[lang];
@@ -122,6 +122,7 @@
     dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });   // клик по затемнению
     dlg.addEventListener("close", () => { document.documentElement.style.overflow = ""; if (opener) opener.focus(); });
     dlg.querySelector("[data-cart-form]").addEventListener("submit", onSubmit);
+    qvSetup(dlg);
     document.body.appendChild(dlg);
     return dlg;
   }
@@ -139,16 +140,50 @@
   }
 
   // ---------- окно товара: фото гарнитура, описание, «в корзину»
+  // листание фото: стрелки по бокам большого фото (на телефоне — нажатие на левую или правую половину),
+  // клавиши ← и → на компьютере, свайп на телефоне; после последнего фото — снова первое
+  const qv = { id: null, i: 0 };
+  function qvPick(i) {
+    const p = P[qv.id];
+    const d = drawer();
+    const n = p.gal.length;
+    qv.i = (i + n) % n;
+    const main = d.querySelector("[data-qv-img]");
+    main.src = imgSrc(p.gal[qv.i]);
+    main.alt = `${name(qv.id)} — ${t.photo(qv.i + 1, n)}`;
+    d.querySelector("[data-qv-count]").textContent = `${qv.i + 1} / ${n}`;
+    d.querySelectorAll("[data-qv-thumbs] button").forEach((b, k) => b.setAttribute("aria-current", k === qv.i ? "true" : "false"));
+    // соседние фото заранее, чтобы листалось без задержки
+    [qv.i + 1, qv.i - 1].forEach(k => { const im = new Image(); im.src = imgSrc(p.gal[(k + n) % n]); });
+  }
+  const qvGo = step => { if (qv.id && P[qv.id].gal.length > 1) qvPick(qv.i + step); };
+  function qvSetup(d) {
+    d.querySelector("[data-qv-prev]").setAttribute("aria-label", t.prev);
+    d.querySelector("[data-qv-next]").setAttribute("aria-label", t.next);
+    d.querySelector("[data-qv-prev]").addEventListener("click", () => qvGo(-1));
+    d.querySelector("[data-qv-next]").addEventListener("click", () => qvGo(1));
+    d.addEventListener("keydown", e => {
+      if (d.querySelector('[data-view="product"]').hidden) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); qvGo(-1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); qvGo(1); }
+    });
+    const fig = d.querySelector(".qv__main");
+    let x0 = null, y0 = 0;
+    fig.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    fig.addEventListener("touchend", e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { e.preventDefault(); qvGo(dx < 0 ? 1 : -1); }
+    });
+  }
+
   function openProduct(id) {
     const p = P[id];
     const d = drawer();
-    const main = d.querySelector("[data-qv-img]");
     const thumbs = d.querySelector("[data-qv-thumbs]");
-    const pick = i => {
-      main.src = imgSrc(p.gal[i]);
-      main.alt = name(id);
-      thumbs.querySelectorAll("button").forEach((b, k) => b.setAttribute("aria-current", k === i ? "true" : "false"));
-    };
+    qv.id = id;
+    d.querySelector(".qv__main").classList.toggle("is-single", p.gal.length < 2);
     thumbs.replaceChildren(...p.gal.map((g, i) => {
       const b = document.createElement("button");
       b.type = "button";
@@ -156,10 +191,10 @@
       const im = document.createElement("img");
       im.src = imgSrc(g); im.alt = ""; im.loading = "lazy";
       b.appendChild(im);
-      b.addEventListener("click", () => pick(i));
+      b.addEventListener("click", () => qvPick(i));
       return b;
     }));
-    pick(0);
+    qvPick(0);
     d.querySelector("[data-qv-name]").textContent = name(id);
     d.querySelector("[data-qv-desc]").textContent = p[lang][1];
     const addBtn = d.querySelector("[data-qv-add]");
