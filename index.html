@@ -119,10 +119,11 @@
 
   .footer__phone { font: 400 20px/30px var(--font-text); }
   /* the photograph under the address and the hours, never over them */
-  .footer-photo { margin: 0; aspect-ratio: 1200 / 1359; overflow: clip; border-radius: var(--r-lg); background: var(--surface); }
-  .footer-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* the interactive Yandex map beside the address and the hours, as tall as the column or taller */
+  .footer-map { min-height: 420px; overflow: clip; border-radius: var(--r-lg); background: var(--surface); }
+  .footer-map iframe { display: block; width: 100%; height: 100%; min-height: 420px; border: 0; }
   .footer__hours-h { margin-top: var(--s-5); }
-  @media (max-width: 1023px) { .footer-photo { grid-column: 1 / -1; aspect-ratio: 4 / 3; margin-top: var(--s-5); } .footer-photo img { object-position: 50% 45%; } }
+  @media (max-width: 1023px) { .footer-map { grid-column: 1 / -1; margin-top: var(--s-5); min-height: 360px; } .footer-map iframe { min-height: 360px; } }
 
   /* every section is at least its screens and grows when a short window (a 1366x657 laptop) cannot hold it,
      so nothing ever lies on the next section; the two-screen catalogue keeps each row at least its content */
@@ -332,14 +333,14 @@
   <section class="section" id="visit" data-place="visit" aria-labelledby="visit-h">
     <div class="wrap">
       <h2 id="visit-h" data-i18n="visit.h2">Ինչպես գտնել մեզ</h2>
-      <p class="type-moment"><a href="https://www.openstreetmap.org/search?query=Yerevanyan%20Street%201%2F24%20Abovyan" data-i18n="addr.short">Երևանյան 1/24, Աբովյան</a></p>
+      <p class="type-moment"><a href="https://www.google.com/maps/search/?api=1&amp;query=40.269974%2C44.617694" data-i18n="addr.short">Երևանյան 1/24, Աբովյան</a></p>
       <div class="grid grid--top">
         <div class="visit visit--card span-6">
           <div class="visit__cols">
             <div class="visit__col stack-4">
               <address class="visit__address"><span data-i18n="addr.l1">Երևանյան փողոց 1/24</span><br><span data-i18n="addr.l2">Աբովյան, Կոտայքի մարզ</span></address>
               <a class="visit__phone link" href="tel:+37477727502">077 72 75 02</a>
-              <a class="btn btn--secondary" href="https://www.openstreetmap.org/search?query=Yerevanyan%20Street%201%2F24%20Abovyan" data-i18n="map">Տեսնել քարտեզում</a>
+              <a class="btn btn--secondary" href="https://www.google.com/maps/search/?api=1&amp;query=40.269974%2C44.617694" data-i18n="map">Ցույց տալ Google Քարտեզում</a>
             </div>
             <div class="visit__col">
               <p class="t-label" data-i18n="hours.h">Աշխատանքային ժամեր</p>
@@ -445,14 +446,14 @@
     </div>
     <div class="closing__links">
       <div class="grid grid--top">
-        <div class="span-6 stack-4">
+        <div class="span-5 stack-4">
           <address class="footer__address" data-i18n="addr.short">Երևանյան 1/24, Աբովյան</address>
           <a class="footer__phone link" href="tel:+37477727502">077 72 75 02</a>
-          <p><a class="link" href="https://www.openstreetmap.org/search?query=Yerevanyan%20Street%201%2F24%20Abovyan" data-i18n="map">Տեսնել քարտեզում</a></p>
+          <p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=40.269974%2C44.617694" data-i18n="map">Ցույց տալ Google Քարտեզում</a></p>
           <h3 class="footer__hours-h" data-i18n="hours.h">Աշխատանքային ժամեր</h3>
           <dl class="hours" data-tz="Asia/Yerevan" data-assumed><dt data-days="mon-sun" data-i18n="hours.days">Երկուշաբթի–կիրակի</dt><dd>10:00–20:00</dd></dl>
         </div>
-        <figure class="footer-photo span-4 start-9"><img src="img/DfrKy8tCKaB_1-foot.jpg" srcset="img/DfrKy8tCKaB_1-foot-s.jpg 600w, img/DfrKy8tCKaB_1-foot.jpg 1200w" sizes="(max-width: 639px) 100vw, (max-width: 1279px) 33vw, 400px" alt="Ննջասենյակ բաց կաղնու երանգով՝ մահճակալ, պահարան, գիշերային սեղաններ և լամպեր" data-i18n-alt="alt.close" loading="lazy" width="1200" height="1359" data-source="client" data-subject="whole light oak bedroom"></figure>
+        <div class="footer-map span-7 start-6"><iframe src="https://yandex.ru/map-widget/v1/?ll=44.617694%2C40.269974&amp;z=17&amp;pt=44.617694%2C40.269974%2Cpm2rdm&amp;lang=ru_RU" data-map-lang title="Քարտեզ՝ InHome, Երևանյան 1/24, Աբովյան" data-i18n-title="map.title" loading="lazy" allowfullscreen></iframe></div>
       </div>
       <nav class="footer__nav" aria-label="Footer">
         <a href="#catalog" data-i18n="nav.furniture">Կահույք</a>
@@ -551,7 +552,7 @@
       "alt.hero": "Гостиная в салоне InHome: диван молочного цвета, два кресла и журнальный столик",
       "visit.h2": "Как нас найти", "addr.short": "Ереванян 1/24, Абовян",
       "addr.l1": "Улица Ереванян 1/24", "addr.l2": "Абовян, Котайкская область",
-      map: "Показать на карте", "hours.h": "Часы работы", "hours.days": "Понедельник–воскресенье",
+      map: "Показать на Google Картах", "hours.h": "Часы работы", "hours.days": "Понедельник–воскресенье",
       "row.delivery": "Доставка", "row.delivery.v": "Бесплатно по Абовяну и ближайшим сёлам",
       "row.credit": "Рассрочка", "row.credit.v": "На месте: 5 банков, Rocket Line и PayLater",
       "alt.visit": "Первый этаж салона: угловой диван у больших окон",
@@ -572,6 +573,7 @@
       "alt.slide4": "Белая ТВ-стенка со стеклянными витринами",
       "alt.slide5": "Спальня в светлом дубе",
       "alt.close": "Спальня в светлом дубе: кровать, шкаф, тумбы и лампы",
+      "map.title": "Карта: InHome, Ереванян 1/24, Абовян",
       notice: "Демо-версия, не официальный сайт"
     },
     en: {
@@ -590,7 +592,7 @@
       "alt.hero": "Living room in the InHome showroom: a cream sofa, two armchairs and a coffee table",
       "visit.h2": "How to find us", "addr.short": "Yerevanyan 1/24, Abovyan",
       "addr.l1": "Yerevanyan Street 1/24", "addr.l2": "Abovyan, Kotayk Province",
-      map: "See it on the map", "hours.h": "Opening hours", "hours.days": "Monday to Sunday",
+      map: "Show on Google Maps", "hours.h": "Opening hours", "hours.days": "Monday to Sunday",
       "row.delivery": "Delivery", "row.delivery.v": "Free in Abovyan and nearby villages",
       "row.credit": "Instalments", "row.credit.v": "On the spot: 5 banks, Rocket Line and PayLater",
       "alt.visit": "The showroom's ground floor: a corner sofa by the tall windows",
@@ -611,6 +613,7 @@
       "alt.slide4": "White TV wall with glass cabinets",
       "alt.slide5": "Bedroom in light oak",
       "alt.close": "Light oak bedroom: bed, wardrobe, nightstands and lamps",
+      "map.title": "Map: InHome, Yerevanyan 1/24, Abovyan",
       notice: "Demo version, not the official site"
     }
   };
@@ -642,6 +645,8 @@
   document.querySelectorAll("[data-i18n-html]").forEach(function (el) { var k = el.dataset.i18nHtml; if (d[k]) el.innerHTML = d[k]; });
   document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { var k = el.dataset.i18nAlt; if (d[k]) el.alt = d[k]; });
   document.querySelectorAll("[data-i18n-aria]").forEach(function (el) { var k = el.dataset.i18nAria; if (d[k]) el.setAttribute("aria-label", d[k]); });
+  document.querySelectorAll("[data-i18n-title]").forEach(function (el) { var k = el.dataset.i18nTitle; if (d[k]) el.title = d[k]; });
+  if (lang === "en") document.querySelectorAll("iframe[data-map-lang]").forEach(function (f) { f.src = f.src.replace("lang=ru_RU", "lang=en_US"); });
   document.querySelector(".skip-link").textContent = d.skip;
 })();
 </script>
