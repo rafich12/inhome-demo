@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="hy" data-type="place" data-radius="soft" data-buttons="block" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>InHome՝ կահույքի սրահ Աբովյանում</title>
+<meta name="description" content="Հյուրասենյակի և ննջասենյակի կահույք սեփական արտադրությունից, Երևանյան 1/24։ Ապառիկ տեղում և անվճար առաքում Աբովյանում։">
+<!-- демо для показа владельцу: не индексировать, пока салон не согласится -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="InHome՝ կահույքի սրահ Աբովյանում">
+<meta property="og:description" content="Երեք հարկ կահույք Երևանյան փողոցում՝ սեփական արտադրություն և ապառիկ տեղում։">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="theme-color" content="#f6f1ea">
+<!-- <link rel="canonical" href="https://[домен салона]/"> -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="place">
+<meta name="page-kind" content="place">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- dealt pairing source-serif (Source Serif 4 / Libre Franklin) has no Armenian: Armenian falls to Noto Serif Armenian,
+     and the text face is Google Sans (Latin, Cyrillic and Armenian in one family) in place of Libre Franklin -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400..500&family=Google+Sans:wght@400..500&display=swap" rel="stylesheet">
+<!-- Source Serif 4 (the dealt display face) carries the Cyrillic headings: the language script adds it on the Russian page only -->
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #f6f1ea; --p-surface: #ece4d8; --p-ink: #2a2521; --p-muted: #6b625a;
+  --p-accent: #d61f1f; --p-accent-ink: #f6f1ea; --p-action: #d61f1f; --p-action-ink: #f6f1ea;
+  --p-inv-bg: #2a2521; --p-inv-surface: #36312d; --p-inv-ink: #f6f1ea; --p-inv-muted: #a29d97;
+  --p-inv-accent: #f6f1ea; --p-inv-accent-ink: #2a2521; --p-inv-action: #f6f1ea; --p-inv-action-ink: #2a2521;
+  --font-display: "Noto Serif Armenian", "Source Serif 4", Georgia, serif;
+  --font-text: "Google Sans", "Noto Sans Armenian", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.02em;
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FurnitureStore","name":"InHome","telephone":"+37477727502",
+ "address":{"@type":"PostalAddress","streetAddress":"Yerevanyan 1/24","addressLocality":"Abovyan","addressRegion":"Kotayk","addressCountry":"AM"},
+ "sameAs":["https://www.instagram.com/inhome_armenia/","https://www.facebook.com/p/Inhome-Armenia-61592223785947/"]}
+</script>
+<!-- page CSS: the logo, the language and cart controls, the goods tiles, the wall, the type moment and the cart panel -->
+<style>
+  /* headings in capitals: the owner's house style for every demo (Raf) */
+  h2 { text-transform: uppercase; letter-spacing: 0; }
+  h1 { overflow-wrap: anywhere; }
+  .nav__logo { gap: 10px; }
+  .nav__logo img { width: 32px; height: 32px; flex: none; }
+  .logo-word { font: 400 18px/1 var(--font-text); letter-spacing: .2em; }
+  .nav__tools { display: flex; align-items: center; gap: var(--s-2); margin-left: auto; flex: none; }
+  .nav__bar > .nav__tools + .nav__actions { margin-left: 0; }
+  .lang { display: flex; align-items: center; }
+  .lang a { display: inline-grid; place-items: center; min-width: 44px; height: 44px; padding: 0 6px; font: 500 15px/1 var(--font-text); color: var(--muted); }
+  .lang a[aria-current="true"] { color: var(--ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  .lang a:hover { color: var(--ink); }
+  .cart-btn { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; border: 0; background: none; color: var(--ink); cursor: pointer; border-radius: var(--r-sm); }
+  .cart-btn svg { width: 22px; height: 22px; }
+  .cart-btn__n { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--action); color: var(--action-ink); font: 500 12px/18px var(--font-text); text-align: center; }
+  .cart-btn__n:empty { display: none; }
+  @media (max-width: 1023px) { .nav__tools { margin-left: auto; } .nav__bar > .nav__toggle { margin-left: 0; } }
+  @media (max-width: 639px) { .lang a { min-width: 36px; padding: 0 2px; } }
+
+  /* the address set large under the visit heading (the dealt type moment) */
+  .type-moment { margin: var(--s-4) 0 var(--s-7); font: var(--display-weight) clamp(40px, 6vw, 88px)/1.02 var(--font-display); letter-spacing: -0.03em; }
+  #visit .type-moment a { display: block; text-decoration: none; background: none; padding: 0; }
+  #visit .type-moment a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .12em; }
+  #visit .visit__phone { font: 400 20px/30px var(--font-text); }
+
+  /* goods: a 1:1 photograph, the name in a two-line slot, the price and Add aligned across the row */
+  .goods { --tile-ratio: 4 / 5; gap: var(--s-3); align-content: start; align-self: start; min-width: 0; }
+  .goods .tile__head > h3, .goods__foot .btn { overflow-wrap: anywhere; hyphens: auto; }
+  .goods__foot .btn { white-space: normal; text-align: center; }
+  .goods .tile__head > h3 { font: 500 16px/24px var(--font-text); min-height: 48px; margin: 0; }
+  .goods__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .goods__foot .tile__price { order: -1; font-size: 16px; color: var(--muted); }
+  .goods__foot .btn { padding-inline: var(--s-4); }
+  @media (max-width: 639px) { .goods__foot { flex-direction: column; align-items: stretch; } .goods__foot .btn { width: 100%; } }
+
+  /* the showroom wall: twelve photographs from line to line, 2px apart (six across; three on a tablet, two on a phone) */
+  .wall { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 2px; }
+  .wall a { display: block; overflow: clip; aspect-ratio: 4 / 5; background: var(--surface); }
+  .wall img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease); }
+  /* every linked photograph answers the pointer: the photo zooms inside its frame, the goods card lifts 2px */
+  .wall a:hover img, .goods .tile__media:hover > img { transform: scale(1.03); }
+  .goods { transition: transform 300ms var(--ease); }
+  .goods:has(.tile__media:hover) { transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { .wall a:hover img, .goods .tile__media:hover > img, .goods:has(.tile__media:hover) { transform: none; } }
+  @media (max-width: 1023px) { .wall { grid-template-columns: repeat(3, minmax(0, 1fr)); } .wall a:nth-child(n+7) { display: none; } }
+  @media (max-width: 639px) { .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } .wall a:nth-child(n+5) { display: none; } }
+
+  /* the first screen: the showroom's photographs change every 5 s (a slow cross-fade and a slight zoom), with a pause button */
+  .hero-slides { overflow: clip; background: var(--surface); }
+  .hero-slides > img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: var(--pos, 50% 50%); opacity: 0; transition: opacity 1400ms var(--ease); }
+  .hero-slides > img.is-on { opacity: 1; }
+  .hero-slides.is-playing > img.is-on { animation: slide-zoom 7s ease-out both; }
+  @keyframes slide-zoom { from { transform: scale(1.06); } to { transform: scale(1); } }
+  .slides-pause { position: absolute; z-index: 2; top: calc(var(--nav) + var(--photo) - 60px); right: max(var(--gut), (100% - var(--container)) / 2); width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: rgb(246 241 234 / .88); color: var(--p-ink); display: grid; place-items: center; cursor: pointer; }
+  .slides-pause svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .slides-pause .i-play { display: none; fill: currentColor; stroke: none; }
+  .slides-pause[aria-pressed="true"] .i-pause { display: none; }
+  .slides-pause[aria-pressed="true"] .i-play { display: block; }
+  @media (prefers-reduced-motion: reduce) { .slides-pause { display: none; } .hero-slides > img { transition: none; } }
+
+  .footer__phone { font: 400 20px/30px var(--font-text); }
+  /* the photograph under the address and the hours, never over them */
+  .footer-photo { margin: var(--s-6) 0 0; aspect-ratio: 10 / 3; overflow: clip; border-radius: var(--r-lg); background: var(--surface); }
+  .footer-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 639px) { .footer-photo { aspect-ratio: 16 / 9; } }
+
+  /* every section is at least its screens and grows when a short window (a 1366x657 laptop) cannot hold it,
+     so nothing ever lies on the next section; the two-screen catalogue keeps each row at least its content */
+  @media (min-width: 1280px) {
+    main > :is(section, .section):not(.hero), footer.closing { height: auto; min-height: calc(var(--h, 1) * 100svh); }
+    :where(main > :is(section, .section):not(.hero), footer.closing) { display: flex; flex-direction: column; }
+    main > :is(section, .section):not(.hero) > .wrap, footer.closing > .wrap { flex: 1 0 auto; height: auto; min-height: 0; }
+  }
+  main > :is(section, .section).g2 > .wrap { grid-template-rows: minmax(auto, 1fr) minmax(auto, 1fr); }
+  /* a short window (a laptop under 820px of height): the catalogue's two rows simply follow each other, no stretched gap */
+  @media (min-width: 1024px) and (max-height: 820px) {
+    main > section#catalog.g2 { min-height: 0; }
+    main > section#catalog.g2 > .wrap { grid-template-rows: auto auto; row-gap: var(--s-8); }
+  }
+  main > .hero--place { height: auto; min-height: 100svh; }
+  /* the hero keeps its entrance zoom (scale 1.05) inside its own box, so the page never scrolls sideways */
+  main > .hero--place { overflow-x: clip; }
+  /* the place hero: a taller photograph so the words end near the fold, not over an empty band */
+  @media (min-width: 1024px) { .hero--place { --photo: min(560px, 60svh); } :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 44px; } }
+  /* the statement fills its screen */
+  #floors .mo-wh__text { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.2; max-width: 1100px; }
+  #floors .t-label { margin-bottom: var(--s-5); }
+  .closing__cta h2 { max-width: none; }
+  .footer--visit .footer__nav { margin-top: var(--s-6); }
+
+  /* big screens: a wider column and larger type from 1680, again from 2200 (a 2560 monitor) */
+  @media (min-width: 1680px) {
+    html[data-type="place"] { --container: 1440px; --t-h2: 40px; --t-lead: 22px; --t-body: 17px; --t-card: 22px; }
+    .hero--place { --photo: min(680px, 60svh); }
+    :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 54px; }
+    #floors .mo-wh__text { font-size: 52px; max-width: 1300px; }
+    .goods .tile__head > h3 { font-size: 18px; line-height: 26px; min-height: 52px; }
+    .type-moment { font-size: 104px; }
+  }
+  @media (min-width: 2200px) {
+    html[data-type="place"] { --container: 1760px; --t-h2: 48px; --t-lead: 24px; --t-body: 18px; --t-card: 24px; }
+    .hero--place { --photo: min(820px, 60svh); }
+    :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 64px; }
+    #floors .mo-wh__text { font-size: 62px; max-width: 1560px; }
+    .goods .tile__head > h3 { font-size: 20px; line-height: 28px; min-height: 56px; }
+    .type-moment { font-size: 128px; }
+  }
+
+  /* under 1280 the goods stay four across on square photographs */
+  @media (max-width: 1279px) { .goods { --tile-ratio: 1 / 1; } }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    main > section#catalog.g2 { --h: 1; }
+    main > section#catalog.g2 > .wrap { display: block; }
+    #catalog .wrap > .grid { margin-top: var(--s-4); }
+    #catalog .section-head { margin-bottom: var(--s-6); }
+    #floors .mo-wh__text { font-size: 36px; }
+    #catalog .grid > .tile.goods.span-4 { --tile-ratio: 4 / 3; }
+    .goods .tile__head > h3 { min-height: 72px; }
+    .goods__foot .tile__price { display: none; }
+    #catalog .grid > .tile.goods.span-3 { grid-column: auto / span 3; }
+    #catalog .grid > .tile.goods.span-4 { grid-column: auto / span 4; }
+    .goods__foot { flex-direction: column; align-items: stretch; gap: var(--s-2); }
+    .goods__foot .btn { width: 100%; padding-inline: var(--s-2); font-size: 14px; }
+    #visit .pl-photo > img { aspect-ratio: 16 / 9; }
+    #visit .pl-photo { margin-top: var(--s-3); }
+  }
+  @media (max-width: 639px) {
+    :root[data-type="place"] .hero--place .hero__text > h1 { font-size: 30px; }
+    .logo-word { display: none; }
+    .nav__tools .lang a { min-width: 34px; padding: 0; font-size: 14px; }
+    .type-moment { font-size: 32px; margin: var(--s-3) 0 var(--s-5); }
+    #visit h2 + .type-moment { margin: var(--s-2) 0 var(--s-4); }
+    #visit .visit__col > .t-label { display: none; }
+    /* the address is set large above the panel: the panel keeps the phone, hours and rows */
+    #visit .visit__address { display: none; }
+    #visit .pl-photo > img { aspect-ratio: 16 / 9; }
+    #visit .pl-photo { margin-top: var(--s-3); }
+    #visit .visit .btn--secondary { display: none; }
+    #floors .mo-wh__text { font-size: 25px; }
+    footer.closing .closing__links > .grid > .start-7 { display: none; }
+    .goods .tile__head > h3 { min-height: 48px; }
+    #catalog .section-head p { display: none; }
+    /* every price waits for the owner (… ֏): on a phone the line is dropped so the catalogue keeps two screens */
+    .goods__foot .tile__price { display: none; }
+    .goods { gap: var(--s-2); }
+    /* the last bedroom takes the full row: a wide crop keeps the catalogue within its two screens */
+    #catalog .grid > .tile.goods.span-4:last-child .tile__media { aspect-ratio: 16 / 9; }
+  }
+  .footer__notice { color: var(--muted); }
+
+  /* the cart and product panel: a side sheet opened from the nav or an Add button (a <dialog>, built from its template) */
+  .drawer { position: fixed; inset: 0 0 0 auto; width: min(520px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0; background: var(--p-bg); color: var(--p-ink); display: flex; flex-direction: column; transform: translateX(100%); transition: transform 320ms var(--ease), display 320ms allow-discrete, overlay 320ms allow-discrete; }
+  .drawer[open] { transform: none; }
+  @starting-style { .drawer[open] { transform: translateX(100%); } }
+  .drawer::backdrop { background: rgb(42 37 33 / .45); }
+  .drawer:not([open]) { display: none; }
+  .drawer__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); height: 72px; padding: 0 var(--s-6); border-bottom: 1px solid var(--line); flex: none; }
+  .drawer__title { margin: 0; font: var(--display-weight) 24px/1.2 var(--font-display); text-transform: uppercase; }
+  .drawer__x { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 0; background: none; color: inherit; cursor: pointer; border-radius: var(--r-sm); }
+  .drawer__body { flex: 1 1 auto; overflow: auto; padding: var(--s-6); display: grid; align-content: start; gap: var(--s-6); }
+  .drawer__body > [hidden] { display: none; }
+  .qv__main { margin: 0; aspect-ratio: 4 / 5; overflow: clip; background: var(--p-surface); border-radius: var(--r-md); }
+  .qv__main img { width: 100%; height: 100%; object-fit: cover; }
+  .qv__thumbs { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-top: var(--s-3); }
+  .qv__thumbs button { width: 64px; height: 64px; padding: 0; border: 1px solid transparent; background: none; cursor: pointer; overflow: clip; border-radius: var(--r-sm); }
+  .qv__thumbs button[aria-current="true"] { border-color: var(--p-ink); }
+  .qv__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+  .qv__name { margin: 0; font: var(--display-weight) 28px/1.2 var(--font-display); }
+  .qv__price { margin: var(--s-2) 0 0; color: var(--p-muted); }
+  .qv__desc { margin: 0; }
+  .cart-list { list-style: none; margin: 0; padding: 0; display: grid; }
+  .cart-item { display: grid; grid-template-columns: 72px 1fr auto; gap: var(--s-4); align-items: center; padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+  .cart-item img { width: 72px; height: 72px; object-fit: cover; border-radius: var(--r-sm); }
+  .cart-item__name { margin: 0 0 var(--s-1); font-weight: 500; }
+  .cart-item__price { margin: 0; color: var(--p-muted); font-size: 14px; }
+  .qty { display: flex; align-items: center; gap: 2px; }
+  .qty button { width: 36px; height: 36px; border: 1px solid var(--line-strong); background: none; color: inherit; border-radius: var(--r-sm); cursor: pointer; font: 500 16px/1 var(--font-text); }
+  .qty output { min-width: 28px; text-align: center; font-variant-numeric: tabular-nums; }
+  .cart-item__rm { grid-column: 2 / -1; justify-self: start; border: 0; background: none; padding: 0; min-height: 32px; color: var(--p-muted); text-decoration: underline; cursor: pointer; font: 400 14px/1 var(--font-text); }
+  .cart-total { display: flex; justify-content: space-between; align-items: baseline; font-weight: 500; margin: 0; }
+  .cart-note { margin: 0; color: var(--p-muted); }
+  .cart-form { display: grid; gap: var(--s-4); }
+  .cart-form .field { display: grid; gap: var(--s-2); }
+  .cart-form label { font-size: 14px; font-weight: 500; }
+  .cart-form :is(input, select, textarea) { width: 100%; min-width: 0; max-width: 100%; min-height: 48px; padding: 12px 14px; font: 400 16px/1.4 var(--font-text); color: var(--p-ink); background: #fff; border: 1px solid var(--line-strong); border-radius: var(--r-sm); }
+  .cart-form textarea { min-height: 88px; resize: vertical; }
+  .cart-form .field__error { margin: 0; color: #a11616; font-size: 14px; }
+  .cart-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .cart-form .btn { width: 100%; }
+  .cart-done { display: grid; gap: var(--s-4); }
+  .cart-done__no { font: var(--display-weight) 28px/1.2 var(--font-display); margin: 0; }
+</style>
+</head>
+<body>
+<!-- type: place (a furniture showroom with its own production; the web shop is its goods section)
+     deal: hero place (never dealt), nav nav-cards, close close-photo, footer footer-visit, rhythm surface-pairs,
+     buttons block, mark: the client's own emblem, the offer: the shop's goods grid (pair dealt; goods keep their tiles),
+     the place: wall, type moment address, rooms not used.
+     palette: the client's own colours through start.mjs brand: the ivory of the showroom walls (#f6f1ea), warm beige
+     (#ece4d8), a warm near-black ink and the red of the InHome logo darkened to #d61f1f for the one action.
+     type: source-serif (Source Serif 4 display) with Noto Serif Armenian; Google Sans for text (Armenian, Cyrillic).
+     moments: word-highlight in #floors.
+     languages: Armenian (main), Russian and English by ?lang= -->
+
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top" data-i18n="skip">Անցնել բովանդակությանը</a>
+    <a class="nav__logo" href="#top" aria-label="InHome"><img src="logo/emblem-96.png" alt="" width="32" height="32"><span class="logo-word">INHOME</span></a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item">
+        <a class="nav__link" href="#catalog"><span data-i18n="nav.furniture">Կահույք</span> <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <a class="menu-card span-4" href="#p-corner-sofa" data-open="corner-sofa">
+              <div class="panel"><img class="frame__img" src="img/DfmTWAFCBzY_1.jpg" srcset="img/DfmTWAFCBzY_1-s.jpg 480w, img/DfmTWAFCBzY_1.jpg 800w" sizes="384px" width="800" height="600" alt="Մոխրագույն անկյունային բազմոց պատուհանի մոտ" loading="lazy" data-source="client" data-subject="corner sofa in the showroom"></div>
+              <span class="t-card" data-i18n="menu.living">Հյուրասենյակ</span>
+              <span class="t-small muted" data-i18n="menu.living.l">Բազմոցներ, բազկաթոռներ, սուրճի սեղաններ</span>
+            </a>
+            <a class="menu-card span-4" href="#p-bed-grey" data-open="bed-grey">
+              <div class="panel"><img class="frame__img" src="img/Df39jgTiDd1_1.jpg" srcset="img/Df39jgTiDd1_1-s.jpg 480w, img/Df39jgTiDd1_1.jpg 800w" sizes="384px" width="800" height="600" alt="Ննջասենյակ մոխրագույն պահարանով" loading="lazy" data-source="client" data-subject="grey bedroom set"></div>
+              <span class="t-card" data-i18n="menu.bed">Ննջասենյակ</span>
+              <span class="t-small muted" data-i18n="menu.bed.l">Մահճակալներ, պահարաններ, կոմոդներ</span>
+            </a>
+            <a class="menu-card span-4" href="#p-tv-set" data-open="tv-set">
+              <div class="panel"><img class="frame__img" src="img/DgAGabtiKJs_2.jpg" srcset="img/DgAGabtiKJs_2-s.jpg 480w, img/DgAGabtiKJs_2.jpg 800w" sizes="384px" width="800" height="600" alt="Սպիտակ ցուցապահարան ոսկեգույն դետալներով" loading="lazy" data-source="client" data-subject="white glass cabinet"></div>
+              <span class="t-card" data-i18n="menu.tv">TV հավաքածուներ</span>
+              <span class="t-small muted" data-i18n="menu.tv.l">Տումբաներ և ապակե ցուցապահարաններ</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="#showroom" data-i18n="nav.showroom">Սրահը</a></div>
+      <div class="nav__item"><a class="nav__link" href="#visit" data-i18n="nav.visit">Հասցե</a></div>
+    </nav>
+    <div class="nav__tools">
+      <div class="lang" role="group" aria-label="Language">
+        <a href="?lang=hy" hreflang="hy" data-lang="hy" aria-label="Հայերեն" aria-current="true">HY</a>
+        <a href="?lang=ru" hreflang="ru" data-lang="ru" aria-label="Russian">RU</a>
+        <a href="?lang=en" hreflang="en" data-lang="en" aria-label="English">EN</a>
+      </div>
+      <button class="cart-btn" type="button" data-cart-open aria-label="Զամբյուղ" data-i18n-aria="cart.title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="cart-btn__n" data-cart-count></span>
+      </button>
+    </div>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#catalog" data-i18n="cta">Պատվիրել կահույք</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Մենյու" data-i18n-aria="menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--place" data-enter aria-labelledby="hero-h">
+    <div class="hero__bg hero-slides" data-slides>
+      <img class="is-on" src="img/DgPLLgmiF8F_1.jpg" srcset="img/DgPLLgmiF8F_1-s.jpg 960w, img/DgPLLgmiF8F_1.jpg 1920w" sizes="100vw" alt="Հյուրասենյակ InHome-ի սրահում՝ կաթնագույն բազմոց, երկու բազկաթոռ և սուրճի սեղան" data-i18n-alt="alt.hero" style="--pos: 50% 58%" fetchpriority="high" width="1920" height="1920" data-source="client" data-subject="living room set in the showroom">
+      <img data-src="img/DfmTWAFCBzY_1-hero.jpg" data-srcset="img/DfmTWAFCBzY_1-hero-s.jpg 960w, img/DfmTWAFCBzY_1-hero.jpg 1600w" sizes="100vw" alt="Մոխրագույն անկյունային բազմոց սրահի մեծ պատուհանների մոտ" data-i18n-alt="alt.slide2" style="--pos: 50% 55%" width="1600" height="1200" data-source="client" data-subject="corner sofa by the showroom windows">
+      <img data-src="img/Dfy2Y57CFBk_1-hero.jpg" data-srcset="img/Dfy2Y57CFBk_1-hero-s.jpg 960w, img/Dfy2Y57CFBk_1-hero.jpg 1600w" sizes="100vw" alt="Ննջասենյակ թավշյա գլխատախտակով և ոսկեգույն դետալներով" data-i18n-alt="alt.slide3" style="--pos: 50% 50%" width="1600" height="1200" data-source="client" data-subject="bedroom with a velvet headboard">
+      <img data-src="img/DgAGabtiKJs_5.jpg" data-srcset="img/DgAGabtiKJs_5-s.jpg 800w, img/DgAGabtiKJs_5.jpg 1600w" sizes="100vw" alt="Սպիտակ TV պատ ապակե ցուցապահարաններով" data-i18n-alt="alt.slide4" style="--pos: 50% 52%" width="1600" height="1600" data-source="client" data-subject="white TV wall in the showroom">
+      <img data-src="img/DfrKy8tCKaB_2-hero.jpg" data-srcset="img/DfrKy8tCKaB_2-hero-s.jpg 960w, img/DfrKy8tCKaB_2-hero.jpg 1600w" sizes="100vw" alt="Ննջասենյակ բաց կաղնու երանգով" data-i18n-alt="alt.slide5" style="--pos: 50% 55%" width="1600" height="1200" data-source="client" data-subject="light oak bedroom">
+    </div>
+    <button class="slides-pause" type="button" data-slides-pause aria-pressed="false" aria-label="Կանգնեցնել լուսանկարները" data-i18n-aria="slides.pause"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-pause" d="M5 3.5v9M11 3.5v9"/><path class="i-play" d="M5 3l8 5-8 5z"/></svg></button>
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__text">
+        <h1 id="hero-h" data-i18n="hero.h1">Կահույքի սրահ Աբովյանում</h1>
+        <p class="hero__lead" data-i18n="hero.lead">3 հարկ կահույք Երևանյան փողոցում՝ սեփական արտադրություն և ապառիկ տեղում։</p>
+        <div class="btn-row"><a class="btn btn--primary" href="#catalog"><span data-i18n="cta">Պատվիրել կահույք</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="visit" data-place="visit" aria-labelledby="visit-h">
+    <div class="wrap">
+      <h2 id="visit-h" data-i18n="visit.h2">Ինչպես գտնել մեզ</h2>
+      <p class="type-moment"><a href="https://www.openstreetmap.org/search?query=Yerevanyan%20Street%201%2F24%20Abovyan" data-i18n="addr.short">Երևանյան 1/24, Աբովյան</a></p>
+      <div class="grid grid--top">
+        <div class="visit visit--card span-6">
+          <div class="visit__cols">
+            <div class="visit__col stack-4">
+              <address class="visit__address"><span data-i18n="addr.l1">Երևանյան փողոց 1/24</span><br><span data-i18n="addr.l2">Աբովյան, Կոտայքի մարզ</span></address>
+              <a class="visit__phone link" href="tel:+37477727502">077 72 75 02</a>
+              <a class="btn btn--secondary" href="https://www.openstreetmap.org/search?query=Yerevanyan%20Street%201%2F24%20Abovyan" data-i18n="map">Տեսնել քարտեզում</a>
+            </div>
+            <div class="visit__col">
+              <p class="t-label" data-i18n="hours.h">Աշխատանքային ժամեր</p>
+              <dl class="hours" data-tz="Asia/Yerevan" data-assumed><dt data-days="mon-sun" data-i18n="hours.days">Երկուշաբթի–կիրակի</dt><dd>10:00–20:00</dd></dl>
+            </div>
+          </div>
+          <ul class="visit__rows">
+            <li><span data-i18n="row.delivery">Առաքում</span><span data-i18n="row.delivery.v">Անվճար՝ Աբովյանում և հարակից գյուղերում</span></li>
+            <li><span data-i18n="row.credit">Ապառիկ</span><span data-i18n="row.credit.v">Տեղում՝ 5 բանկ, Rocket Line և PayLater</span></li>
+          </ul>
+        </div>
+        <figure class="pl-photo pl-photo--end span-6 start-7" style="--pl-r: 1.3333"><img src="img/DfmTWAFCBzY_2.jpg" srcset="img/DfmTWAFCBzY_2-s.jpg 800w, img/DfmTWAFCBzY_2.jpg 1600w" sizes="(max-width: 1023px) 100vw, 588px" alt="Սրահի առաջին հարկը՝ անկյունային բազմոց մեծ պատուհանների մոտ" data-i18n-alt="alt.visit" loading="lazy" width="1520" height="1520" data-source="client" data-subject="showroom ground floor by the windows"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section statement" id="floors" data-moment="word-highlight" aria-label="Երեք հարկ" data-i18n-aria="floors.label">
+    <div class="wrap">
+      <p class="t-label" data-i18n="floors.label">Երեք հարկ</p>
+      <p class="mo-wh__text" data-i18n-html="floors.text">Գլխավոր սրահում՝ բազմոցներ, սուրճի սեղաններ և TV հավաքածուներ, մինուս մեկ հարկում՝ ննջասենյակներ, երրորդում՝ խոհանոցային սեղան-աթոռներ։ Ամբողջը մեր արտադրությունն է, և ցանկացած հավաքածու կպատրաստենք <strong>ձեր չափերով</strong> ու գույնով։</p>
+    </div>
+  </section>
+
+  <section class="section g2 ground-surface" id="catalog" aria-labelledby="catalog-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head section-head--split">
+          <div><h2 id="catalog-h" data-i18n="catalog.h2">Հյուրասենյակ և ննջասենյակ</h2><p data-i18n="catalog.line">Գինը և առաքման օրը կհաստատենք զանգով։</p></div>
+        </div>
+        <div class="grid">
+          <article class="tile goods span-3" id="p-sofa-set">
+            <a class="tile__media" href="#p-sofa-set" data-open="sofa-set"><img src="img/DgPLLgmiF8F_2.jpg" srcset="img/DgPLLgmiF8F_2-s.jpg 480w, img/DgPLLgmiF8F_2.jpg 960w" sizes="(max-width: 639px) 50vw, (max-width: 1279px) 25vw, 384px" alt="Կաթնագույն բազմոց և սուրճի սեղան" data-i18n-alt="p.sofa-set" loading="lazy" decoding="async" width="960" height="1200" data-source="client" data-subject="sofa set"></a>
+            <div class="tile__head"><h3 data-i18n="p.sofa-set">Բազմոց երկու բազկաթոռով</h3></div>
+            <div class="goods__foot"><button class="btn btn--secondary" type="button" data-add="sofa-set" data-i18n="add">Ավելացնել զամբյուղ</button><span class="tile__price">… ֏</span></div>
+          </article>
+          <article class="tile goods span-3" id="p-corner-sofa">
+            <a class="tile__media" href="#p-corner-sofa" data-open="corner-sofa"><img src="img/DfmTWAFCBzY_3.jpg" srcset="img/DfmTWAFCBzY_3-s.jpg 480w, img/DfmTWAFCBzY_3.jpg 960w" sizes="(max-width: 639px) 50vw, (max-width: 1279px) 25vw, 384px" alt="Մոխրագույն մոդուլային անկյունային բազմոց" data-i18n-alt="p.corner-sofa" loading="lazy" decoding="async" width="960" height="1200" data-source="client" data-subject="modular corner sofa"></a>
+            <div class="tile__head"><h3 data-i18n="p.corner-sofa">Անկյունային բազմոց</h3></div>
+            <div class="goods__foot"><button class="btn btn--secondary" type="button" data-add="corner-sofa" data-i18n="add">Ավելացնել զամբյուղ</button><span class="tile__price">… ֏</span></div>
+          </article>
+          <article class="tile goods span-3" id="p-tv-set">
+            <a class="tile__media" href="#p-tv-set" data-open="tv-set"><img src="img/DgAGabtiKJs_1.jpg" srcset="img/DgAGabtiKJs_1-s.jpg 480w, img/DgAGabtiKJs_1.jpg 960w" sizes="(max-width: 639px) 50vw, (max-width: 1279px) 25vw, 384px" alt="Սպիտակ TV տումբա երկու ապակե ցուցապահարանով" data-i18n-alt="p.tv-set" loading="lazy" decoding="async" width="960" height="1200" data-source="client" data-subject="TV unit with glass cabinets"></a>
+            <div class="tile__head"><h3 data-i18n="p.tv-set">TV հավաքածու</h3></div>
+            <div class="goods__foot"><button class="btn btn--secondary" type="button" data-add="tv-set" data-i18n="add">Ավելացնել զամբյուղ</button><span class="tile__price">… ֏</span></div>
+          </article>
+          <article class="tile goods span-3" id="p-armchair">
+            <a class="tile__media" href="#p-armchair" data-open="armchair"><img src="img/DgPLLgmiF8F_3.jpg" srcset="img/DgPLLgmiF8F_3-s.jpg 480w, img/DgPLLgmiF8F_3.jpg 960w" sizes="(max-width: 639px) 50vw, (max-width: 1279px) 25vw, 384px" alt="Կաթնագույն բազկաթոռ փայտե ոտքերով" data-i18n-alt="p.armchair" loading="lazy" decoding="async" width="960" height="1200" data-source="client" data-subject="cream armchair"></a>
+            <div class="tile__head"><h3 data-i18n="p.armchair">Կաթնագույն բազկաթոռ</h3></div>
+            <div class="goods__foot"><button class="btn btn--secondary" type="button" data-add="armchair" data-i18n="add">Ավելացնել զամբյուղ</button><span class="tile__price">… ֏</span></div>
+          </article>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="tile goods span-4" id="p-bed-velvet">
+          <a class="tile__media" href="#p-bed-velvet" data-open="bed-velvet"><img src="img/Dfy2Y57CFBk_5.jpg" srcset="img/Dfy2Y57CFBk_5-s.jpg 480w, img/Dfy2Y57CFBk_5.jpg 960w" sizes="(max-width: 639px) 100vw, (max-width: 1279px) 33vw, 384px" alt="Մահճակալ թավշյա գլխատախտակով" data-i18n-alt="p.bed-velvet" loading="lazy" decoding="async" width="960" height="1200" data-source="client" data-subject="bedroom with velvet headboard"></a>
+          <div class="tile__head"><h3 data-i18n="p.bed-velvet">Ննջասենյակ թավշյա գլխատախտակով</h3></div>
+          <div class="goods__foot"><button class="btn btn--secondary" type="button" data-add="bed-velvet" data-i18n="add">Ավելացնել զամբյուղ</button><span class="tile__price">… ֏</span></div>
+        </article>
+        <article class="tile goods span-4" id="p-bed-oak">
+          <a class="tile__media" href="#p-bed-oak" data-open="bed-oak"><img src="img/DfrKy8tCKaB_6.jpg" srcset="img/DfrKy8tCKaB_6-s.jpg 480w, img/DfrKy8tCKaB_6.jpg 960w" sizes="(max-width: 639px) 100vw, (max-width: 1279px) 33vw, 384px" alt="Մահճակալ բաց կաղնու երանգով" data-i18n-alt="p.bed-oak" loading="lazy" decoding="async" width="960" height="1200" data-source="client" data-subject="light oak bedroom"></a>
+          <div class="tile__head"><h3 data-i18n="p.bed-oak">Ննջասենյակ բաց կաղնու երանգով</h3></div>
+          <div class="goods__foot"><button class="btn btn--secondary" type="button" data-add="bed-oak" data-i18n="add">Ավելացնել զամբյուղ</button><span class="tile__price">… ֏</span></div>
+        </article>
+        <article class="tile goods span-4" id="p-bed-grey">
+          <a class="tile__media" href="#p-bed-grey" data-open="bed-grey"><img src="img/Df39jgTiDd1_6.jpg" srcset="img/Df39jgTiDd1_6-s.jpg 480w, img/Df39jgTiDd1_6.jpg 960w" sizes="(max-width: 639px) 100vw, (max-width: 1279px) 33vw, 384px" alt="Մահճակալ մոխրագույն գլխատախտակով և հայելիով պահարան" data-i18n-alt="p.bed-grey" loading="lazy" decoding="async" width="960" height="1200" data-source="client" data-subject="grey and oak bedroom"></a>
+          <div class="tile__head"><h3 data-i18n="p.bed-grey">Ննջասենյակ՝ մոխրագույն և կաղնի</h3></div>
+          <div class="goods__foot"><button class="btn btn--secondary" type="button" data-add="bed-grey" data-i18n="add">Ավելացնել զամբյուղ</button><span class="tile__price">… ֏</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="showroom" aria-labelledby="showroom-h">
+    <div class="wrap">
+      <div class="section-head section-head--split">
+        <div><h2 id="showroom-h" data-i18n="showroom.h2">Մեր սրահը</h2><p data-i18n="showroom.line">Կահույքը կարող եք տեսնել, շոշափել և փորձել տեղում՝ երեք հարկում։</p></div>
+      </div>
+      <div class="wall">
+        <a href="#catalog" data-open="tv-set"><img src="img/DgAGabtiKJs_3.jpg" srcset="img/DgAGabtiKJs_3-s.jpg 480w, img/DgAGabtiKJs_3.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Ապակե ցուցապահարան լուսավորությամբ" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="glass cabinet detail"></a>
+        <a href="#catalog" data-open="bed-grey"><img src="img/Df39jgTiDd1_4.jpg" srcset="img/Df39jgTiDd1_4-s.jpg 480w, img/Df39jgTiDd1_4.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Կոմոդ և սեղանի լամպ" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="chest of drawers with lamp"></a>
+        <a href="#catalog" data-open="bed-velvet"><img src="img/Dfy2Y57CFBk_4.jpg" srcset="img/Dfy2Y57CFBk_4-s.jpg 480w, img/Dfy2Y57CFBk_4.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Գիշերային սեղան ոսկեգույն օղակով" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="nightstand with gold ring handle"></a>
+        <a href="#catalog" data-open="bed-oak"><img src="img/DfrKy8tCKaB_3.jpg" srcset="img/DfrKy8tCKaB_3-s.jpg 480w, img/DfrKy8tCKaB_3.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Կաղնե պահարան հայելիով" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="oak wardrobe with mirror"></a>
+        <a href="#catalog" data-open="tv-set"><img src="img/DgAGabtiKJs_4.jpg" srcset="img/DgAGabtiKJs_4-s.jpg 480w, img/DgAGabtiKJs_4.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Սպիտակ տումբա ոսկեգույն բռնակներով" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="white sideboard with gold handles"></a>
+        <a href="#catalog" data-open="bed-grey"><img src="img/Df39jgTiDd1_5.jpg" srcset="img/Df39jgTiDd1_5-s.jpg 480w, img/Df39jgTiDd1_5.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Մահճակալ ասեղնագործ ծածկոցով" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="bed with embroidered cover"></a>
+        <a href="#catalog" data-open="bed-oak"><img src="img/DfrKy8tCKaB_5.jpg" srcset="img/DfrKy8tCKaB_5-s.jpg 480w, img/DfrKy8tCKaB_5.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Կաղնե գիշերային սեղան" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="oak nightstand"></a>
+        <a href="#catalog" data-open="bed-velvet"><img src="img/Dfy2Y57CFBk_2.jpg" srcset="img/Dfy2Y57CFBk_2-s.jpg 480w, img/Dfy2Y57CFBk_2.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Սպիտակ չորսդռնանի պահարան" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="white four-door wardrobe"></a>
+        <a href="#catalog" data-open="bed-grey"><img src="img/Df39jgTiDd1_3.jpg" srcset="img/Df39jgTiDd1_3-s.jpg 480w, img/Df39jgTiDd1_3.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Հայելիով պահարան և սեղանի լամպ" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="wardrobe with mirror and lamp"></a>
+        <a href="#catalog" data-open="bed-oak"><img src="img/DfrKy8tCKaB_4.jpg" srcset="img/DfrKy8tCKaB_4-s.jpg 480w, img/DfrKy8tCKaB_4.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Մահճակալ և գիշերային լամպ" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="bed with a bedside lamp"></a>
+        <a href="#catalog" data-open="bed-velvet"><img src="img/Dfy2Y57CFBk_3.jpg" srcset="img/Dfy2Y57CFBk_3-s.jpg 480w, img/Dfy2Y57CFBk_3.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Դիմահարդարման սեղան հայելիով" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="dressing table with mirror"></a>
+        <a href="#catalog" data-open="bed-grey"><img src="img/Df39jgTiDd1_2.jpg" srcset="img/Df39jgTiDd1_2-s.jpg 480w, img/Df39jgTiDd1_2.jpg 600w" sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 240px" alt="Կոմոդ մոխրագույն ճակատով" loading="lazy" decoding="async" width="600" height="750" data-source="client" data-subject="chest of drawers in grey"></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--visit" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head--split">
+        <div><h2 id="close-h" data-i18n="close.h2">Պատվիրեք կահույքը տնից</h2><p class="t-lead" data-i18n="close.line">Առաքումը Աբովյանում և հարակից գյուղերում անվճար է։</p></div>
+        <a class="btn btn--primary" href="#catalog"><span data-i18n="cta">Պատվիրել կահույք</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-6 stack-4">
+          <address class="footer__address" data-i18n="addr.short">Երևանյան 1/24, Աբովյան</address>
+          <a class="footer__phone link" href="tel:+37477727502">077 72 75 02</a>
+          <p><a class="link" href="https://www.openstreetmap.org/search?query=Yerevanyan%20Street%201%2F24%20Abovyan" data-i18n="map">Տեսնել քարտեզում</a></p>
+        </div>
+        <div class="span-6 start-7 stack-4">
+          <h3 data-i18n="hours.h">Աշխատանքային ժամեր</h3>
+          <dl class="hours" data-tz="Asia/Yerevan" data-assumed><dt data-days="mon-sun" data-i18n="hours.days">Երկուշաբթի–կիրակի</dt><dd>10:00–20:00</dd></dl>
+        </div>
+      </div>
+      <figure class="footer-photo"><img src="img/Df39jgTiDd1_1-foot.jpg" srcset="img/Df39jgTiDd1_1-foot-s.jpg 960w, img/Df39jgTiDd1_1-foot.jpg 1440w" sizes="(max-width: 1279px) 100vw, 1200px" alt="Ննջասենյակ մոխրագույն և կաղնու երանգներով" data-i18n-alt="alt.close" loading="lazy" width="1440" height="432" data-source="client" data-subject="grey and oak bedroom"></figure>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="#catalog" data-i18n="nav.furniture">Կահույք</a>
+        <a href="#showroom" data-i18n="nav.showroom">Սրահը</a>
+        <a href="#visit" data-i18n="nav.visit">Հասցե</a>
+        <div class="socials">
+          <a href="https://www.instagram.com/inhome_armenia/" aria-label="Instagram"><svg class="ic ic-svg ic-24" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+          <a href="https://www.facebook.com/p/Inhome-Armenia-61592223785947/" aria-label="Facebook"><svg class="ic ic-svg ic-24" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+        </div>
+      </nav>
+      <div class="footer__legal">
+        <span>&copy; 2026 InHome</span>
+        <span class="footer__notice" data-i18n="notice">Ցուցադրական տարբերակ, ոչ պաշտոնական կայք</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="#catalog" data-i18n="cta">Պատվիրել կահույք</a>
+</nav>
+
+<!-- the cart and product panel, built on first use (a dialog opened by the cart button, a product photograph or Add) -->
+<template id="drawer-tpl">
+  <dialog class="drawer" aria-labelledby="drawer-title">
+    <div class="drawer__head">
+      <p class="drawer__title" id="drawer-title"></p>
+      <button class="drawer__x" type="button" data-close>
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4 4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer__body">
+      <div data-view="product" hidden>
+        <figure class="qv__main"><img alt="" data-qv-img></figure>
+        <div class="qv__thumbs" data-qv-thumbs></div>
+        <div>
+          <p class="qv__name" data-qv-name></p>
+          <p class="qv__price">… ֏</p>
+        </div>
+        <p class="qv__desc" data-qv-desc></p>
+        <button class="btn btn--primary" type="button" data-qv-add></button>
+      </div>
+      <div data-view="cart" hidden>
+        <ul class="cart-list" data-cart-list></ul>
+        <p class="cart-note" data-cart-empty></p>
+        <p class="cart-total" data-cart-total-row><span data-t="total"></span><span>… ֏</span></p>
+        <p class="cart-note" data-t="priceNote"></p>
+        <form class="cart-form" data-cart-form novalidate>
+          <div class="field"><label for="f-name" data-t="fName"></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
+            <p class="field__error" id="f-name-err" hidden></p></div>
+          <div class="field"><label for="f-phone" data-t="fPhone"></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="f-phone-err">
+            <p class="field__error" id="f-phone-err" hidden></p></div>
+          <div class="field"><label for="f-addr" data-t="fAddr"></label>
+            <input id="f-addr" name="addr" type="text" autocomplete="street-address" required aria-describedby="f-addr-err">
+            <p class="field__error" id="f-addr-err" hidden></p></div>
+          <div class="field"><label for="f-pay" data-t="fPay"></label>
+            <select id="f-pay" name="pay"><option value="cash" data-t="pay.cash"></option><option value="card" data-t="pay.card"></option><option value="credit" data-t="pay.credit"></option></select></div>
+          <div class="field"><label for="f-note" data-t="fNote"></label>
+            <textarea id="f-note" name="note" rows="3"></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <button class="btn btn--primary" type="submit" data-t="cta"></button>
+          <p class="form__status" role="status" data-form-status></p>
+        </form>
+      </div>
+      <div data-view="done" hidden>
+        <div class="cart-done">
+          <p class="cart-done__no" data-done-no></p>
+          <p data-t="sent"></p>
+          <button class="btn btn--secondary" type="button" data-close data-t="back"></button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</template>
+
+<script>
+/* Languages: Armenian is written in the page; Russian and English replace it before the moments mount.
+   ?lang=ru|en|hy chooses, the last choice is remembered. */
+(function () {
+  var T = {
+    ru: {
+      title: "InHome — мебельный салон в Абовяне",
+      desc: "Гостиные и спальни собственного производства, Ереванян 1/24. Рассрочка на месте и бесплатная доставка по Абовяну.",
+      skip: "Перейти к содержанию", menu: "Меню",
+      "nav.furniture": "Мебель", "nav.showroom": "Салон", "nav.visit": "Адрес",
+      "menu.living": "Гостиная", "menu.living.l": "Диваны, кресла, журнальные столики",
+      "menu.bed": "Спальня", "menu.bed.l": "Кровати, шкафы, комоды",
+      "menu.tv": "ТВ-гарнитуры", "menu.tv.l": "Тумбы и стеклянные витрины",
+      cta: "Заказать мебель",
+      "hero.h1": "Мебельный салон в Абовяне",
+      "hero.lead": "3 этажа мебели на улице Ереванян: своё производство и рассрочка на месте.",
+      "alt.hero": "Гостиная в салоне InHome: диван молочного цвета, два кресла и журнальный столик",
+      "visit.h2": "Как нас найти", "addr.short": "Ереванян 1/24, Абовян",
+      "addr.l1": "Улица Ереванян 1/24", "addr.l2": "Абовян, Котайкская область",
+      map: "Показать на карте", "hours.h": "Часы работы", "hours.days": "Понедельник–воскресенье",
+      "row.delivery": "Доставка", "row.delivery.v": "Бесплатно по Абовяну и ближайшим сёлам",
+      "row.credit": "Рассрочка", "row.credit.v": "На месте: 5 банков, Rocket Line и PayLater",
+      "alt.visit": "Первый этаж салона: угловой диван у больших окон",
+      "floors.label": "Три этажа",
+      "floors.text": "На главном этаже — диваны, журнальные столики и ТВ-гарнитуры, этажом ниже — спальни, на третьем — кухонные столы и стулья. Всё это наше производство, и любой гарнитур сделаем <strong>в ваших размерах</strong> и цвете.",
+      "catalog.h2": "Гостиные и спальни",
+      "catalog.line": "Цену и день доставки подтвердим по телефону.",
+      "catalog.link": "Смотреть в Instagram", add: "В корзину",
+      "p.sofa-set": "Диван с двумя креслами", "p.corner-sofa": "Угловой диван",
+      "p.tv-set": "ТВ-гарнитур", "p.armchair": "Кресло молочного цвета",
+      "p.bed-velvet": "Спальня с бархатным изголовьем", "p.bed-oak": "Спальня в светлом дубе",
+      "p.bed-grey": "Спальня, серый и дуб", "p.dressing": "Туалетный столик с зеркалом",
+      "showroom.h2": "Наш салон", "showroom.line": "Мебель можно увидеть, потрогать и примерить на месте, на трёх этажах.",
+      "showroom.link": "Смотреть в Facebook",
+      "close.h2": "Закажите мебель из дома", "close.line": "Доставка по Абовяну и ближайшим сёлам бесплатна.",
+      "alt.slide2": "Серый угловой диван у больших окон салона",
+      "alt.slide3": "Спальня с бархатным изголовьем и золотыми деталями",
+      "alt.slide4": "Белая ТВ-стенка со стеклянными витринами",
+      "alt.slide5": "Спальня в светлом дубе",
+      "slides.pause": "Остановить фото",
+      "alt.close": "Спальня в сером и дубе",
+      notice: "Демо-версия, не официальный сайт"
+    },
+    en: {
+      title: "InHome: furniture showroom in Abovyan",
+      desc: "Living rooms and bedrooms from our own workshop at Yerevanyan 1/24. Instalments on the spot and free delivery in Abovyan.",
+      skip: "Skip to content", menu: "Menu",
+      "nav.furniture": "Furniture", "nav.showroom": "Showroom", "nav.visit": "Visit",
+      "menu.living": "Living room", "menu.living.l": "Sofas, armchairs, coffee tables",
+      "menu.bed": "Bedroom", "menu.bed.l": "Beds, wardrobes, chests of drawers",
+      "menu.tv": "TV units", "menu.tv.l": "TV stands and glass cabinets",
+      cta: "Order furniture",
+      "hero.h1": "Furniture showroom in Abovyan",
+      "hero.lead": "3 floors of furniture on Yerevanyan Street: made in our own workshop, instalments on the spot.",
+      "alt.hero": "Living room in the InHome showroom: a cream sofa, two armchairs and a coffee table",
+      "visit.h2": "How to find us", "addr.short": "Yerevanyan 1/24, Abovyan",
+      "addr.l1": "Yerevanyan Street 1/24", "addr.l2": "Abovyan, Kotayk Province",
+      map: "See it on the map", "hours.h": "Opening hours", "hours.days": "Monday to Sunday",
+      "row.delivery": "Delivery", "row.delivery.v": "Free in Abovyan and nearby villages",
+      "row.credit": "Instalments", "row.credit.v": "On the spot: 5 banks, Rocket Line and PayLater",
+      "alt.visit": "The showroom's ground floor: a corner sofa by the tall windows",
+      "floors.label": "Three floors",
+      "floors.text": "The main floor holds sofas, coffee tables and TV units, the floor below holds bedrooms, and the third floor kitchen tables and chairs. We make all of it ourselves, and any set can be built <strong>to your sizes</strong> and colour.",
+      "catalog.h2": "Living rooms and bedrooms",
+      "catalog.line": "We confirm the price and the delivery day by phone.",
+      "catalog.link": "See more on Instagram", add: "Add to cart",
+      "p.sofa-set": "Sofa with two armchairs", "p.corner-sofa": "Corner sofa",
+      "p.tv-set": "TV unit", "p.armchair": "Cream armchair",
+      "p.bed-velvet": "Bedroom with a velvet headboard", "p.bed-oak": "Bedroom in light oak",
+      "p.bed-grey": "Bedroom in grey and oak", "p.dressing": "Dressing table with mirror",
+      "showroom.h2": "Our showroom", "showroom.line": "See, touch and try every piece on site, across three floors.",
+      "showroom.link": "See it on Facebook",
+      "close.h2": "Order furniture from home", "close.line": "Delivery in Abovyan and nearby villages is free.",
+      "alt.slide2": "Grey corner sofa by the showroom windows",
+      "alt.slide3": "Bedroom with a velvet headboard and gold details",
+      "alt.slide4": "White TV wall with glass cabinets",
+      "alt.slide5": "Bedroom in light oak",
+      "slides.pause": "Pause the photographs",
+      "alt.close": "Bedroom in grey and oak",
+      notice: "Demo version, not the official site"
+    }
+  };
+  var q = new URLSearchParams(location.search).get("lang");
+  var saved = null;
+  try { saved = localStorage.getItem("inhome-lang"); } catch (e) {}
+  var lang = /^(hy|ru|en)$/.test(q || "") ? q : (/^(hy|ru|en)$/.test(saved || "") ? saved : "hy");
+  try { localStorage.setItem("inhome-lang", lang); } catch (e) {}
+  window.INHOME_LANG = lang;
+  document.querySelectorAll(".lang a").forEach(function (a) {
+    a.setAttribute("aria-current", a.dataset.lang === lang ? "true" : "false");
+  });
+  if (lang === "hy") return;
+  if (lang === "ru") {
+    var fl = document.createElement("link");
+    fl.rel = "stylesheet";
+    fl.href = "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..500&display=swap";
+    document.head.appendChild(fl);
+    // Cyrillic headings and their digits in one face
+    document.documentElement.style.setProperty("--font-display", '"Source Serif 4", "Noto Serif Armenian", Georgia, serif');
+  }
+  var d = T[lang];
+  document.documentElement.lang = lang;
+  document.title = d.title;
+  document.querySelector('meta[name="description"]').content = d.desc;
+  document.querySelector('meta[property="og:title"]').content = d.title;
+  document.querySelector('meta[property="og:description"]').content = d.desc;
+  document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.dataset.i18n; if (d[k]) el.textContent = d[k]; });
+  document.querySelectorAll("[data-i18n-html]").forEach(function (el) { var k = el.dataset.i18nHtml; if (d[k]) el.innerHTML = d[k]; });
+  document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { var k = el.dataset.i18nAlt; if (d[k]) el.alt = d[k]; });
+  document.querySelectorAll("[data-i18n-aria]").forEach(function (el) { var k = el.dataset.i18nAria; if (d[k]) el.setAttribute("aria-label", d[k]); });
+  document.querySelector(".skip-link").textContent = d.skip;
+})();
+</script>
+<script src="cart.js" defer></script>
+<script src="slides.js" defer></script>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+</body>
+</html>

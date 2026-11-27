@@ -1,0 +1,33 @@
+# Публикуем только сам сайт. Исходники фото (raw, esr), снимки проверок, заметки и служебные папки — не кладём.
+/*
+!/.gitignore
+!/.nojekyll
+!/index.html
+!/cart.js
+!/slides.js
+!/favicon.png
+!/share.jpg
+!/img/
+!/logo/
+/logo/*
+!/logo/emblem-96.png
+# из набора дизайн-скилла — только то, что страница загружает
+!/assets/
+/assets/*
+!/assets/system.css
+!/assets/system.js
+!/assets/ui/
+!/assets/motion/
+!/assets/backgrounds/
+!/assets/icons/
+/assets/icons/*
+!/assets/icons/icon.css
+!/assets/layout/
+/assets/layout/*
+!/assets/layout/layout.css
+!/assets/layout/layout.js
+!/assets/moments/
+/assets/moments/*
+!/assets/moments/moments.js
+!/assets/moments/lib.js
+!/assets/moments/word-highlight/
