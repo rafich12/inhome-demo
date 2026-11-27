@@ -162,10 +162,12 @@
     d.querySelector("[data-qv-next]").setAttribute("aria-label", t.next);
     d.querySelector("[data-qv-prev]").addEventListener("click", () => qvGo(-1));
     d.querySelector("[data-qv-next]").addEventListener("click", () => qvGo(1));
-    d.addEventListener("keydown", e => {
-      if (d.querySelector('[data-view="product"]').hidden) return;
-      if (e.key === "ArrowLeft") { e.preventDefault(); qvGo(-1); }
-      if (e.key === "ArrowRight") { e.preventDefault(); qvGo(1); }
+    // клавиши ← и → слушаем на всей странице: после щелчка по тексту в окне фокус может уйти из него
+    document.addEventListener("keydown", e => {
+      if (!d.open || d.querySelector('[data-view="product"]').hidden) return;
+      if (e.target.closest && e.target.closest("input, textarea, select")) return;
+      if (e.key === "ArrowLeft" || e.key === "Left") { e.preventDefault(); qvGo(-1); }
+      if (e.key === "ArrowRight" || e.key === "Right") { e.preventDefault(); qvGo(1); }
     });
     const fig = d.querySelector(".qv__main");
     let x0 = null, y0 = 0;
